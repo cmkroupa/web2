@@ -5,114 +5,98 @@ interface AboutProps {
 }
 
 const About: React.FC<AboutProps> = ({ className }) => {
-  return (
-    <section id="about" className="relative py-20 overflow-hidden bg-slate-50">
-      {/* Background elements */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,black,transparent)]"></div>
-      </div>
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-blue-200/20 rounded-full mix-blend-multiply filter blur-xl animate-float"></div>
-        <div className="absolute bottom-1/4 left-1/4 w-72 h-72 bg-teal-200/20 rounded-full mix-blend-multiply filter blur-xl animate-float-delay"></div>
-      </div>
+  const interests = [
+    {
+      title: 'AI & Machine Learning',
+      description: 'Exploring the frontiers of artificial intelligence and its applications',
+      icon: '🤖'
+    },
+    {
+      title: 'Web Development',
+      description: 'Building modern, responsive, and user-friendly web applications',
+      icon: '🌐'
+    },
+    {
+      title: 'Cloud Computing',
+      description: 'Designing scalable and efficient cloud-based solutions',
+      icon: '☁️'
+    }
+  ];
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 animate-fade-in-up">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-teal-600 to-emerald-600 bg-clip-text text-transparent">
+  const stats = [
+    { label: 'Years Experience', value: '5+' },
+    { label: 'Projects Completed', value: '50+' },
+    { label: 'Happy Clients', value: '30+' },
+    { label: 'GitHub Stars', value: '1k+' }
+  ];
+
+  return (
+    <section id="about" className="relative min-h-screen flex items-center justify-center py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">
             About Me
           </h2>
-          <div className="h-0.5 w-32 bg-gradient-to-r from-blue-400 to-teal-400 mx-auto mt-4 animate-subtle-pulse"></div>
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            Get to know more about my journey and expertise
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Image section */}
-          <div className="relative animate-fade-in-up">
-            <div className="relative rounded-2xl overflow-hidden shadow-xl">
-              <img
-                src="/path-to-your-image.jpg"
-                alt="Profile"
-                className="w-full h-auto"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-blue-600/20 to-transparent"></div>
-            </div>
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-blue-200/30 rounded-full mix-blend-multiply filter blur-xl animate-float"></div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Story */}
+          <div className="bg-white/40 backdrop-blur-xl rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/20">
+            <h3 className="text-2xl font-semibold text-gray-900 mb-4">
+              My Story
+            </h3>
+            <p className="text-gray-600 mb-6">
+              I'm a passionate software engineer with a strong foundation in computer science and a keen eye for creating elegant solutions. My journey in tech began with a curiosity about how things work, which evolved into a deep love for building impactful software.
+            </p>
+            <p className="text-gray-600">
+              With expertise in full-stack development, cloud architecture, and artificial intelligence, I strive to create solutions that not only solve problems but also provide exceptional user experiences.
+            </p>
           </div>
 
-          {/* Content section */}
-          <div className="space-y-6 animate-fade-in-up-delay">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-semibold text-slate-800 mb-3">My Journey</h3>
-                  <p className="text-slate-600">
-                    I'm a passionate full-stack developer with a strong foundation in both frontend and backend technologies. My journey in software development began with a curiosity about how things work, which led me to explore various aspects of web development and software engineering.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-semibold text-slate-800 mb-3">Technical Expertise</h3>
-                  <p className="text-slate-600">
-                    On the frontend, I specialize in creating responsive and intuitive user interfaces using React, TypeScript, and modern CSS frameworks. For backend development, I work with Node.js, Express, and various databases to build scalable and efficient server-side applications.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-semibold text-slate-800 mb-3">Problem Solving</h3>
-                  <p className="text-slate-600">
-                    I enjoy tackling complex problems and finding elegant solutions. My approach combines analytical thinking with practical implementation, ensuring that the solutions I create are both efficient and maintainable.
-                  </p>
-                </div>
-              </div>
-
-              <div className="space-y-6">
-                <div>
-                  <h3 className="text-xl font-semibold text-slate-800 mb-3">Continuous Learning</h3>
-                  <p className="text-slate-600">
-                    The tech industry is constantly evolving, and I'm committed to staying at the forefront of new technologies and best practices. I regularly participate in coding challenges, contribute to open-source projects, and explore new frameworks and tools.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-semibold text-slate-800 mb-3">Collaboration</h3>
-                  <p className="text-slate-600">
-                    I believe in the power of collaboration and knowledge sharing. Working in teams has taught me the importance of clear communication, code reviews, and mentoring others. I enjoy participating in tech communities and helping fellow developers grow.
-                  </p>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-semibold text-slate-800 mb-3">Future Goals</h3>
-                  <p className="text-slate-600">
-                    I'm excited about the future of technology and my role in shaping it. My goals include mastering cloud technologies, contributing to impactful open-source projects, and helping build the next generation of web applications.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Skills preview */}
-            <div className="grid grid-cols-2 gap-4 mt-8">
-              <div className="bg-white/80 backdrop-blur-sm border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
-                <h3 className="text-slate-800 font-semibold mb-2">Frontend</h3>
-                <p className="text-slate-600">React, TypeScript, Tailwind CSS</p>
-              </div>
-              <div className="bg-white/80 backdrop-blur-sm border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
-                <h3 className="text-slate-800 font-semibold mb-2">Backend</h3>
-                <p className="text-slate-600">Node.js, Express, MongoDB</p>
-              </div>
-            </div>
-
-            {/* CTA Button */}
-            <div className="mt-8">
-              <a
-                href="#contact"
-                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 font-medium"
+          {/* Interests */}
+          <div className="space-y-6">
+            {interests.map((interest) => (
+              <div
+                key={interest.title}
+                className="bg-white/40 backdrop-blur-xl rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/20"
               >
-                Let's Connect
-                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                </svg>
-              </a>
-            </div>
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 rounded-full bg-white/60 backdrop-blur-sm flex items-center justify-center shadow-lg">
+                    <span className="text-2xl">{interest.icon}</span>
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-semibold text-gray-900 mb-2">
+                      {interest.title}
+                    </h4>
+                    <p className="text-gray-600">
+                      {interest.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
+        </div>
+
+        {/* Stats */}
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
+          {stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="bg-white/40 backdrop-blur-xl rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 border border-white/20"
+            >
+              <div className="text-3xl font-bold text-purple-600 mb-2">
+                {stat.value}
+              </div>
+              <div className="text-gray-600">
+                {stat.label}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

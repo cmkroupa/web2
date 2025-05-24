@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 interface SkillsProps {
     className?: string;
 }
@@ -5,117 +7,181 @@ interface SkillsProps {
 interface Skill {
     name: string;
     level: number;
-    icon?: string;
+    category: 'frontend' | 'backend' | 'tools' | 'other';
+    icon: string;
+    color: string;
+    description: string;
 }
 
-interface SkillCategory {
-    name: string;
-    skills: Skill[];
-}
+const Skills: React.FC<SkillsProps> = ({ className }) => {
+    const [activeCategory, setActiveCategory] = useState<string>('all');
+    const [hoveredSkill, setHoveredSkill] = useState<Skill | null>(null);
 
-export default function Skills({ className = '' }: SkillsProps) {
-    const skillCategories: SkillCategory[] = [
+    const skills: Skill[] = [
         {
-            name: "Programming Languages",
-            skills: [
-                { name: "JavaScript/TypeScript", level: 90 },
-                { name: "Python", level: 85 },
-                { name: "Java", level: 80 },
-                { name: "C++", level: 75 },
-            ]
+            name: 'React',
+            level: 90,
+            category: 'frontend',
+            icon: '⚛️',
+            color: '#61DAFB',
+            description: 'Building modern, responsive user interfaces with React and its ecosystem'
         },
         {
-            name: "Web Technologies",
-            skills: [
-                { name: "React", level: 90 },
-                { name: "Node.js", level: 85 },
-                { name: "HTML/CSS", level: 90 },
-                { name: "UnoCSS/Tailwind", level: 85 },
-            ]
+            name: 'TypeScript',
+            level: 85,
+            category: 'frontend',
+            icon: '📘',
+            color: '#3178C6',
+            description: 'Writing type-safe, maintainable code with TypeScript'
         },
         {
-            name: "Tools & Frameworks",
-            skills: [
-                { name: "Git", level: 90 },
-                { name: "Docker", level: 75 },
-                { name: "AWS", level: 70 },
-                { name: "MongoDB", level: 80 },
-            ]
+            name: 'Node.js',
+            level: 80,
+            category: 'backend',
+            icon: '🟢',
+            color: '#339933',
+            description: 'Developing scalable server-side applications with Node.js'
+        },
+        {
+            name: 'Express',
+            level: 85,
+            category: 'backend',
+            icon: '🚂',
+            color: '#000000',
+            description: 'Creating robust RESTful APIs with Express.js'
+        },
+        {
+            name: 'Git',
+            level: 90,
+            category: 'tools',
+            icon: '📦',
+            color: '#F05032',
+            description: 'Version control and collaborative development with Git'
+        },
+        {
+            name: 'Docker',
+            level: 75,
+            category: 'tools',
+            icon: '🐳',
+            color: '#2496ED',
+            description: 'Containerization and deployment with Docker'
         }
     ];
 
+    const categories = [
+        { id: 'all', name: 'All Skills' },
+        { id: 'frontend', name: 'Frontend' },
+        { id: 'backend', name: 'Backend' },
+        { id: 'tools', name: 'Tools' }
+    ];
+
+    const filteredSkills = activeCategory === 'all' 
+        ? skills 
+        : skills.filter(skill => skill.category === activeCategory);
+
     return (
-        <section id="skills" className={`relative ${className}`}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-                {/* Section header */}
+        <section id="skills" className="relative min-h-screen py-20 overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+            {/* Animated background */}
+            <div className="absolute inset-0">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:32px_32px]"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-transparent to-teal-500/10"></div>
+            </div>
+
+            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Header */}
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl font-bold text-gray-900 mb-4 animate-fade-in-up">Skills & Expertise</h2>
-                    <div className="h-1 w-20 bg-indigo-600 mx-auto rounded"></div>
+                    <h2 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-teal-400 to-emerald-400 mb-4">
+                        Technical Expertise
+                    </h2>
+                    <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+                        A comprehensive showcase of my technical skills and proficiency levels
+                    </p>
                 </div>
 
-                {/* Decorative elements */}
-                <div className="absolute top-20 right-0 w-72 h-72 bg-indigo-50 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float"></div>
-                <div className="absolute bottom-20 left-0 w-72 h-72 bg-blue-50 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float-delay"></div>
-
-                {/* Skills grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {skillCategories.map((category, categoryIndex) => (
-                        <div 
-                            key={categoryIndex}
-                            className="bg-white rounded-xl shadow-lg p-6 group hover:transform hover:scale-[1.02] transition-all duration-300 animate-fade-in-up"
-                            style={{ animationDelay: `${categoryIndex * 200}ms` }}
+                {/* Category Filter */}
+                <div className="flex justify-center space-x-4 mb-12">
+                    {categories.map(category => (
+                        <button
+                            key={category.id}
+                            onClick={() => setActiveCategory(category.id)}
+                            className={`px-6 py-2 rounded-full transition-all duration-300 transform hover:scale-105 ${
+                                activeCategory === category.id
+                                    ? 'bg-gradient-to-r from-blue-500 to-teal-500 text-white shadow-lg'
+                                    : 'bg-slate-800 text-slate-400 hover:bg-slate-700'
+                            }`}
                         >
-                            {/* Category header */}
-                            <h3 className="text-xl font-bold text-gray-900 mb-6">{category.name}</h3>
+                            {category.name}
+                        </button>
+                    ))}
+                </div>
 
-                            {/* Skills list */}
-                            <div className="space-y-6">
-                                {category.skills.map((skill, skillIndex) => (
-                                    <div 
-                                        key={skillIndex}
-                                        className="group/skill"
-                                    >
-                                        <div className="flex justify-between items-center mb-2">
-                                            <span className="text-gray-700 font-medium">{skill.name}</span>
-                                            <span className="text-gray-500 text-sm opacity-0 group-hover/skill:opacity-100 transition-opacity duration-300">
-                                                {skill.level}%
-                                            </span>
-                                        </div>
-                                        <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-                                            <div 
-                                                className="h-full bg-gradient-to-r from-indigo-500 to-blue-500 rounded-full transform origin-left transition-transform duration-1000 ease-out scale-x-0 group-hover:scale-x-100"
-                                                style={{ width: `${skill.level}%` }}
-                                            ></div>
-                                        </div>
+                {/* Skills Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {filteredSkills.map((skill, index) => (
+                        <div
+                            key={skill.name}
+                            className="group relative"
+                            onMouseEnter={() => setHoveredSkill(skill)}
+                            onMouseLeave={() => setHoveredSkill(null)}
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-teal-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300"></div>
+                            <div className="relative bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50 hover:border-slate-600/50 transition-all duration-300">
+                                <div className="flex items-center justify-between mb-4">
+                                    <div className="flex items-center space-x-3">
+                                        <span className="text-3xl">{skill.icon}</span>
+                                        <h3 className="text-xl font-semibold text-white">{skill.name}</h3>
                                     </div>
-                                ))}
-                            </div>
+                                    <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-teal-400">
+                                        {skill.level}%
+                                    </span>
+                                </div>
 
-                            {/* Hover effect overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-indigo-50 to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl -z-10"></div>
+                                {/* Skill Level Visualization */}
+                                <div className="relative h-2 bg-slate-700 rounded-full overflow-hidden mb-4">
+                                    <div
+                                        className="absolute inset-y-0 left-0 bg-gradient-to-r from-blue-500 to-teal-500 rounded-full transition-all duration-1000 ease-out"
+                                        style={{ width: `${skill.level}%` }}
+                                    ></div>
+                                </div>
+
+                                {/* Skill Description */}
+                                <p className="text-slate-400 text-sm">
+                                    {skill.description}
+                                </p>
+
+                                {/* Hover Effect */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-teal-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            </div>
                         </div>
                     ))}
                 </div>
 
-                {/* Additional skills tags */}
-                <div className="mt-12">
-                    <h3 className="text-xl font-bold text-gray-900 mb-6 text-center animate-fade-in-up">Other Skills</h3>
-                    <div className="flex flex-wrap justify-center gap-3 animate-fade-in-up-delay">
-                        {[
-                            "RESTful APIs", "GraphQL", "Agile", "UI/UX Design",
-                            "Test-Driven Development", "CI/CD", "System Design",
-                            "Problem Solving", "Team Leadership"
-                        ].map((skill, index) => (
-                            <span
-                                key={index}
-                                className="px-4 py-2 bg-white text-gray-700 rounded-full shadow-md hover:shadow-lg hover:scale-105 hover:bg-gradient-to-r hover:from-indigo-50 hover:to-blue-50 transition-all duration-300 cursor-default"
-                            >
-                                {skill}
-                            </span>
-                        ))}
+                {/* Skill Details Modal */}
+                {hoveredSkill && (
+                    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+                        <div className="bg-slate-800 rounded-2xl p-8 max-w-lg w-full border border-slate-700/50">
+                            <div className="flex items-center space-x-4 mb-6">
+                                <span className="text-4xl">{hoveredSkill.icon}</span>
+                                <div>
+                                    <h3 className="text-2xl font-bold text-white">{hoveredSkill.name}</h3>
+                                    <p className="text-slate-400">Proficiency Level: {hoveredSkill.level}%</p>
+                                </div>
+                            </div>
+                            <p className="text-slate-300 mb-6">{hoveredSkill.description}</p>
+                            <div className="flex justify-end">
+                                <button
+                                    onClick={() => setHoveredSkill(null)}
+                                    className="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-colors duration-300"
+                                >
+                                    Close
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
         </section>
     );
-}
+};
+
+export default Skills;
