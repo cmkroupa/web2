@@ -7,17 +7,17 @@ interface AboutProps {
 const About: React.FC<AboutProps> = ({ className }) => {
   const interests = [
     {
-      title: 'AI & Machine Learning',
+      title: 'Artificial Intelligence',
       description: 'Exploring the frontiers of artificial intelligence and its applications',
       icon: '🤖'
     },
     {
-      title: 'Web Development',
+      title: 'Cybersecurity',
       description: 'Building modern, responsive, and user-friendly web applications',
       icon: '🌐'
     },
     {
-      title: 'Cloud Computing',
+      title: 'Some other big thing',
       description: 'Designing scalable and efficient cloud-based solutions',
       icon: '☁️'
     }

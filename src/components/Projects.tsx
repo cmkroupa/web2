@@ -154,7 +154,8 @@ const Projects: React.FC<ProjectsProps> = ({ className }) => {
                     {filteredProjects.map((project) => (
                         <div
                             key={project.title}
-                            className="bg-white/40 backdrop-blur-xl rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-white/20 group"
+                            onClick={() => setActiveProject(project)}
+                            className="bg-white/40 backdrop-blur-xl rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-white/20 group cursor-pointer"
                         >
                             {/* Project Image */}
                             <div className="relative h-48 overflow-hidden">
@@ -213,12 +214,12 @@ const Projects: React.FC<ProjectsProps> = ({ className }) => {
 
                 {/* Project Details Modal */}
                 {activeProject && (
-                    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-                        <div className="bg-white/40 backdrop-blur-xl rounded-2xl p-8 max-w-4xl w-full shadow-xl border border-white/20">
+                    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+                        <div className="bg-white/80 backdrop-blur-xl rounded-2xl p-8 max-w-4xl w-full shadow-xl border border-white/20">
                             <div className="flex justify-between items-start mb-6">
                                 <div>
                                     <h3 className="text-2xl font-bold text-gray-900">{activeProject.title}</h3>
-                                    <p className="text-gray-600 mt-2">{activeProject.description}</p>
+                                    <p className="text-gray-700 mt-2">{activeProject.description}</p>
                                 </div>
                                 <button
                                     onClick={() => setActiveProject(null)}
@@ -247,7 +248,7 @@ const Projects: React.FC<ProjectsProps> = ({ className }) => {
                                         {activeProject.features.map((feature, idx) => (
                                             <li key={idx} className="flex items-start">
                                                 <span className="text-purple-500 mr-2">✨</span>
-                                                <span className="text-gray-600">{feature}</span>
+                                                <span className="text-gray-700">{feature}</span>
                                             </li>
                                         ))}
                                     </ul>
@@ -259,27 +260,27 @@ const Projects: React.FC<ProjectsProps> = ({ className }) => {
                                     <div className="space-y-4">
                                         {activeProject.challenges.map((challenge, idx) => (
                                             <div key={idx} className="space-y-2">
-                                                <p className="text-gray-600">Challenge: {challenge}</p>
-                                                <p className="text-purple-600">Solution: {activeProject.solutions[idx]}</p>
+                                                <p className="text-gray-700">Challenge: {challenge}</p>
+                                                <p className="text-purple-700">Solution: {activeProject.solutions[idx]}</p>
                                             </div>
                                         ))}
                                     </div>
                                 </div>
                             </div>
 
-                            {/* Project Link */}
-                            <div className="mt-8 text-center">
-                                <a
-                                    href={activeProject.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-all duration-300 font-medium"
-                                >
-                                    View Project
-                                    <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                                    </svg>
-                                </a>
+                            {/* Technologies */}
+                            <div className="mt-8">
+                                <h4 className="text-lg font-semibold text-gray-900 mb-3">Technologies Used</h4>
+                                <div className="flex flex-wrap gap-2">
+                                    {activeProject.technologies.map((tech) => (
+                                        <span
+                                            key={tech}
+                                            className="px-4 py-2 bg-white/80 backdrop-blur-sm rounded-lg text-gray-800 shadow-sm"
+                                        >
+                                            {tech}
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>

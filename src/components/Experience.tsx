@@ -12,7 +12,7 @@ interface Experience {
   description: string;
   achievements: string[];
   technologies: string[];
-  icon: string;
+  year: number;
 }
 
 const Experience: React.FC<ExperienceProps> = ({ className }) => {
@@ -29,7 +29,7 @@ const Experience: React.FC<ExperienceProps> = ({ className }) => {
         'Mentored junior developers and conducted code reviews'
       ],
       technologies: ['React', 'Node.js', 'AWS', 'Docker', 'Kubernetes'],
-      icon: '💻'
+      year: 2021
     },
     {
       title: 'Software Engineer',
@@ -43,12 +43,12 @@ const Experience: React.FC<ExperienceProps> = ({ className }) => {
         'Collaborated with UX team to improve user engagement by 35%'
       ],
       technologies: ['Vue.js', 'Python', 'PostgreSQL', 'Redis'],
-      icon: '🚀'
+      year: 2019
     }
-  ];
+  ].sort((a, b) => b.year - a.year);
 
   return (
-    <section id="experience" className="relative min-h-screen flex items-center justify-center">
+    <section id="experience" className="relative min-h-screen flex items-center justify-center py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
@@ -63,10 +63,10 @@ const Experience: React.FC<ExperienceProps> = ({ className }) => {
         {/* Timeline */}
         <div className="relative">
           {/* Timeline Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gray-200/50"></div>
+          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gray-200"></div>
 
           {/* Experience Cards */}
-          <div className="space-y-12">
+          <div className="space-y-8">
             {experiences.map((exp, index) => (
               <div
                 key={exp.title}
@@ -74,27 +74,25 @@ const Experience: React.FC<ExperienceProps> = ({ className }) => {
                   index % 2 === 0 ? 'justify-start' : 'justify-end'
                 }`}
               >
-                {/* Timeline Dot */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-purple-600 rounded-full"></div>
+                {/* Year Label */}
+                <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-purple-600 text-white px-4 py-1 rounded-lg shadow-lg">
+                  {exp.year}
+                </div>
 
                 {/* Experience Card */}
-                <div className={`w-5/12 ${index % 2 === 0 ? 'mr-auto' : 'ml-auto'}`}>
-                  <div className="bg-white/40 backdrop-blur-xl rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/20">
-                    {/* Icon and Title */}
-                    <div className="flex items-center space-x-4 mb-6">
-                      <div className="w-16 h-16 rounded-full bg-white/60 backdrop-blur-sm flex items-center justify-center shadow-lg">
-                        <span className="text-3xl">{exp.icon}</span>
-                      </div>
+                <div 
+                  className={`w-5/12 ${index % 2 === 0 ? 'mr-auto' : 'ml-auto'}`}
+                >
+                  <div className="bg-white/40 backdrop-blur-xl rounded-lg p-6 shadow-lg border border-white/20">
+                    <div className="flex justify-between items-start mb-4">
                       <div>
-                        <h3 className="text-xl font-semibold text-gray-900">
-                          {exp.title}
-                        </h3>
-                        <p className="text-purple-600 font-medium">{exp.company}</p>
+                        <h3 className="text-xl font-bold text-gray-900">{exp.title}</h3>
+                        <p className="text-lg text-purple-600 font-medium">{exp.company}</p>
                       </div>
                     </div>
 
                     {/* Location and Period */}
-                    <div className="flex items-center space-x-4 mb-4">
+                    <div className="flex items-center space-x-6 mb-4">
                       <div className="flex items-center text-gray-600">
                         <svg className="w-5 h-5 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
@@ -111,20 +109,20 @@ const Experience: React.FC<ExperienceProps> = ({ className }) => {
                     </div>
 
                     {/* Description */}
-                    <p className="text-gray-600 mb-6">
+                    <p className="text-gray-600 text-sm mb-4">
                       {exp.description}
                     </p>
 
                     {/* Achievements */}
-                    <div className="mb-6">
-                      <h4 className="text-sm font-semibold text-gray-900 mb-3">
+                    <div className="mb-4">
+                      <h4 className="text-sm font-semibold text-gray-900 mb-2">
                         Key Achievements
                       </h4>
-                      <ul className="space-y-2">
+                      <ul className="space-y-1">
                         {exp.achievements.map((achievement, idx) => (
                           <li
                             key={idx}
-                            className="flex items-start space-x-2 text-gray-600"
+                            className="flex items-start space-x-2 text-gray-600 text-sm"
                           >
                             <span className="text-purple-500 mt-1">•</span>
                             <span>{achievement}</span>
@@ -135,14 +133,14 @@ const Experience: React.FC<ExperienceProps> = ({ className }) => {
 
                     {/* Technologies */}
                     <div>
-                      <h4 className="text-sm font-semibold text-gray-900 mb-3">
+                      <h4 className="text-sm font-semibold text-gray-900 mb-2">
                         Technologies Used
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {exp.technologies.map((tech) => (
                           <span
                             key={tech}
-                            className="px-3 py-1 bg-white/60 backdrop-blur-sm rounded-full text-sm text-gray-700"
+                            className="px-3 py-1 bg-white/60 backdrop-blur-sm rounded-lg text-gray-700 text-sm shadow-sm"
                           >
                             {tech}
                           </span>
