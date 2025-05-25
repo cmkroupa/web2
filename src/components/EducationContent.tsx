@@ -127,11 +127,6 @@ const EducationContent: React.FC<EducationContentProps> = ({ className }) => {
                                         <h3 className="text-2xl font-bold text-gray-900">{edu.degree}</h3>
                                         <p className="text-xl text-purple-600 font-medium">{edu.school}</p>
                                     </div>
-                                    <div className="inline-flex items-center px-4 py-2 bg-white/60 backdrop-blur-sm rounded-lg">
-                                        <span className="text-sm font-medium text-purple-600">
-                                            GPA: {edu.gpa}
-                                        </span>
-                                    </div>
                                 </div>
 
                                 {/* Location and Period */}
@@ -183,13 +178,13 @@ const EducationContent: React.FC<EducationContentProps> = ({ className }) => {
 
                     {/* Course Modal */}
                     {selectedCourse && (
-                        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-                            <div className="bg-white/80 backdrop-blur-xl rounded-lg p-8 max-w-2xl w-full shadow-xl border border-white/20">
+                        <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center p-4 z-50 transition-all duration-300">
+                            <div className="bg-white/60 backdrop-blur-md rounded-lg p-8 max-w-2xl w-full shadow-lg border border-white/20 transform transition-all duration-300">
                                 <div className="flex justify-between items-start mb-6">
                                     <h3 className="text-2xl font-bold text-gray-900">{selectedCourse.name}</h3>
                                     <button
                                         onClick={() => setSelectedCourse(null)}
-                                        className="text-gray-400 hover:text-gray-600 transition-colors duration-300"
+                                        className="text-gray-500 hover:text-gray-700 transition-colors duration-300"
                                     >
                                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"/>
@@ -209,7 +204,7 @@ const EducationContent: React.FC<EducationContentProps> = ({ className }) => {
                                         {selectedCourse.topics.map((topic, idx) => (
                                             <span
                                                 key={idx}
-                                                className="px-4 py-2 bg-white/80 backdrop-blur-sm rounded-lg text-gray-800 shadow-sm"
+                                                className="px-4 py-2 bg-white/70 backdrop-blur-sm text-purple-700 rounded-lg text-sm font-medium"
                                             >
                                                 {topic}
                                             </span>

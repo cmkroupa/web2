@@ -12,7 +12,6 @@ interface Project {
     features: string[];
     challenges: string[];
     solutions: string[];
-    link: string;
     color: string;
     category: 'web' | 'mobile' | 'ai' | 'other';
     icon: string;
@@ -45,7 +44,6 @@ const Projects: React.FC<ProjectsProps> = ({ className }) => {
                 'Implemented transfer learning for faster ML',
                 'Created custom D3.js optimizations'
             ],
-            link: 'https://project-link.com',
             color: '#6366F1',
             category: 'ai',
             icon: '🤖',
@@ -72,7 +70,6 @@ const Projects: React.FC<ProjectsProps> = ({ className }) => {
                 'Implemented Stripe integration',
                 'Utilized WebSocket for real-time'
             ],
-            link: 'https://project-link.com',
             color: '#EC4899',
             category: 'web',
             icon: '🛍️',
@@ -99,7 +96,6 @@ const Projects: React.FC<ProjectsProps> = ({ className }) => {
                 'Implemented local storage',
                 'Utilized Firebase for real-time'
             ],
-            link: 'https://project-link.com',
             color: '#10B981',
             category: 'mobile',
             icon: '💪',
@@ -212,74 +208,61 @@ const Projects: React.FC<ProjectsProps> = ({ className }) => {
                     ))}
                 </div>
 
-                {/* Project Details Modal */}
+                {/* Project Modal */}
                 {activeProject && (
-                    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-                        <div className="bg-white/80 backdrop-blur-xl rounded-2xl p-8 max-w-4xl w-full shadow-xl border border-white/20">
+                    <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+                        <div className="bg-white/60 backdrop-blur-md rounded-2xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-lg border border-white/20">
                             <div className="flex justify-between items-start mb-6">
-                                <div>
-                                    <h3 className="text-2xl font-bold text-gray-900">{activeProject.title}</h3>
-                                    <p className="text-gray-700 mt-2">{activeProject.description}</p>
-                                </div>
+                                <h3 className="text-2xl font-bold text-gray-900">{activeProject.title}</h3>
                                 <button
                                     onClick={() => setActiveProject(null)}
-                                    className="text-gray-400 hover:text-gray-600 transition-colors duration-300"
+                                    className="text-gray-500 hover:text-gray-700"
                                 >
                                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"/>
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                                     </svg>
                                 </button>
                             </div>
 
-                            {/* Project Image */}
-                            <div className="relative h-64 rounded-lg overflow-hidden mb-6">
-                                <img
-                                    src={activeProject.image}
-                                    alt={activeProject.title}
-                                    className="w-full h-full object-cover"
-                                />
-                            </div>
+                            <div className="space-y-6">
+                                <p className="text-gray-800">{activeProject.description}</p>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                {/* Features */}
                                 <div>
                                     <h4 className="text-lg font-semibold text-gray-900 mb-3">Key Features</h4>
-                                    <ul className="space-y-2">
+                                    <ul className="list-disc list-inside space-y-2 text-gray-800">
                                         {activeProject.features.map((feature, idx) => (
-                                            <li key={idx} className="flex items-start">
-                                                <span className="text-purple-500 mr-2">✨</span>
-                                                <span className="text-gray-700">{feature}</span>
-                                            </li>
+                                            <li key={idx}>{feature}</li>
                                         ))}
                                     </ul>
                                 </div>
 
-                                {/* Challenges & Solutions */}
+                                <div>
+                                    <h4 className="text-lg font-semibold text-gray-900 mb-3">Technologies Used</h4>
+                                    <div className="flex flex-wrap gap-2">
+                                        {activeProject.technologies.map((tech, idx) => (
+                                            <span
+                                                key={idx}
+                                                className="px-3 py-1 bg-white/70 backdrop-blur-sm text-purple-700 rounded-full text-sm"
+                                            >
+                                                {tech}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+
                                 <div>
                                     <h4 className="text-lg font-semibold text-gray-900 mb-3">Challenges & Solutions</h4>
                                     <div className="space-y-4">
                                         {activeProject.challenges.map((challenge, idx) => (
-                                            <div key={idx} className="space-y-2">
-                                                <p className="text-gray-700">Challenge: {challenge}</p>
-                                                <p className="text-purple-700">Solution: {activeProject.solutions[idx]}</p>
+                                            <div key={idx} className="bg-white/70 backdrop-blur-sm p-4 rounded-lg">
+                                                <h5 className="font-medium text-gray-900 mb-2">Challenge {idx + 1}</h5>
+                                                <p className="text-gray-800 mb-2">{challenge}</p>
+                                                <p className="text-gray-800">
+                                                    <span className="font-medium text-purple-600">Solution:</span> {activeProject.solutions[idx]}
+                                                </p>
                                             </div>
                                         ))}
                                     </div>
-                                </div>
-                            </div>
-
-                            {/* Technologies */}
-                            <div className="mt-8">
-                                <h4 className="text-lg font-semibold text-gray-900 mb-3">Technologies Used</h4>
-                                <div className="flex flex-wrap gap-2">
-                                    {activeProject.technologies.map((tech) => (
-                                        <span
-                                            key={tech}
-                                            className="px-4 py-2 bg-white/80 backdrop-blur-sm rounded-lg text-gray-800 shadow-sm"
-                                        >
-                                            {tech}
-                                        </span>
-                                    ))}
                                 </div>
                             </div>
                         </div>

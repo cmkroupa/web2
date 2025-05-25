@@ -63,10 +63,10 @@ const Experience: React.FC<ExperienceProps> = ({ className }) => {
         {/* Timeline */}
         <div className="relative">
           {/* Timeline Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gray-200"></div>
+          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-purple-500 to-purple-300"></div>
 
           {/* Experience Cards */}
-          <div className="space-y-8">
+          <div className="space-y-24">
             {experiences.map((exp, index) => (
               <div
                 key={exp.title}
@@ -75,20 +75,21 @@ const Experience: React.FC<ExperienceProps> = ({ className }) => {
                 }`}
               >
                 {/* Year Label */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-purple-600 text-white px-4 py-1 rounded-lg shadow-lg">
+                <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-purple-600 text-white px-6 py-2 rounded-full shadow-lg z-10">
                   {exp.year}
                 </div>
 
                 {/* Experience Card */}
                 <div 
-                  className={`w-5/12 ${index % 2 === 0 ? 'mr-auto' : 'ml-auto'}`}
+                  className={`w-[45%] transform transition-all duration-500 hover:scale-105 ${
+                    index % 2 === 0 ? 'mr-auto' : 'ml-auto'
+                  }`}
                 >
-                  <div className="bg-white/40 backdrop-blur-xl rounded-lg p-6 shadow-lg border border-white/20">
-                    <div className="flex justify-between items-start mb-4">
-                      <div>
-                        <h3 className="text-xl font-bold text-gray-900">{exp.title}</h3>
-                        <p className="text-lg text-purple-600 font-medium">{exp.company}</p>
-                      </div>
+                  <div className="bg-white/40 backdrop-blur-xl rounded-xl p-6 shadow-lg border border-white/20 hover:shadow-xl transition-all duration-300">
+                    {/* Title and Company */}
+                    <div className="mb-4">
+                      <h3 className="text-xl font-bold text-gray-900 mb-1">{exp.title}</h3>
+                      <p className="text-lg text-purple-600 font-medium">{exp.company}</p>
                     </div>
 
                     {/* Location and Period */}
@@ -109,7 +110,7 @@ const Experience: React.FC<ExperienceProps> = ({ className }) => {
                     </div>
 
                     {/* Description */}
-                    <p className="text-gray-600 text-sm mb-4">
+                    <p className="text-gray-600 mb-4">
                       {exp.description}
                     </p>
 
@@ -118,11 +119,11 @@ const Experience: React.FC<ExperienceProps> = ({ className }) => {
                       <h4 className="text-sm font-semibold text-gray-900 mb-2">
                         Key Achievements
                       </h4>
-                      <ul className="space-y-1">
+                      <ul className="space-y-2">
                         {exp.achievements.map((achievement, idx) => (
                           <li
                             key={idx}
-                            className="flex items-start space-x-2 text-gray-600 text-sm"
+                            className="flex items-start space-x-2 text-gray-600"
                           >
                             <span className="text-purple-500 mt-1">•</span>
                             <span>{achievement}</span>
@@ -140,7 +141,7 @@ const Experience: React.FC<ExperienceProps> = ({ className }) => {
                         {exp.technologies.map((tech) => (
                           <span
                             key={tech}
-                            className="px-3 py-1 bg-white/60 backdrop-blur-sm rounded-lg text-gray-700 text-sm shadow-sm"
+                            className="px-3 py-1 bg-white/60 backdrop-blur-sm rounded-full text-gray-700 text-sm"
                           >
                             {tech}
                           </span>
