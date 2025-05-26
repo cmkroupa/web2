@@ -139,7 +139,7 @@ const Projects: React.FC<ProjectsProps> = ({ className }) => {
                                     : 'bg-white/40 backdrop-blur-sm text-gray-600 hover:bg-white/60'
                             }`}
                         >
-                            <span className="mr-2">{category.icon}</span>
+                            <span className="mr-2 text-lg leading-none">{category.icon}</span>
                             {category.name}
                         </button>
                     ))}
@@ -151,7 +151,7 @@ const Projects: React.FC<ProjectsProps> = ({ className }) => {
                         <div
                             key={project.title}
                             onClick={() => setActiveProject(project)}
-                            className="bg-white/40 backdrop-blur-xl rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-white/20 group cursor-pointer"
+                            className="bg-white/20 backdrop-blur-xl rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer"
                         >
                             {/* Project Image */}
                             <div className="relative h-48 overflow-hidden">
@@ -187,7 +187,6 @@ const Projects: React.FC<ProjectsProps> = ({ className }) => {
                                 {/* Links */}
                                 <div className="flex space-x-4">
                                     <a
-                                        href={project.link}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="flex-1 px-4 py-2 bg-purple-600 text-white text-center rounded-lg hover:bg-purple-700 transition-colors duration-300"

@@ -28,6 +28,10 @@ dist-ssr
 /.pnp
 .pnp.js
 
+
+/private/*
+/private/MongoDB Cloud X509 Cert.pem
+
 # testing
 /coverage
 

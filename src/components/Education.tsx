@@ -53,7 +53,7 @@ const Education: React.FC<EducationProps> = ({ className }) => {
     ];
 
     return (
-        <div className="fixed inset-0 -z-10">
+        <div className="fixed inset-0 -z-10 ">
             {/* Animated background elements */}
             <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50"></div>

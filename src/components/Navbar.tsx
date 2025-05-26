@@ -51,7 +51,7 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <a href="#home" className="text-2xl font-bold text-gray-900">
-            YourName
+            Cameron Kroupa
           </a>
 
           {/* Desktop Navigation */}

@@ -8,26 +8,26 @@ const About: React.FC<AboutProps> = ({ className }) => {
   const interests = [
     {
       title: 'Artificial Intelligence',
-      description: 'Exploring the frontiers of artificial intelligence and its applications',
+      description: 'Designing and implementing intelligent algorithms for data analysis, pattern recognition, and advanced decision-making systems.',
       icon: '🤖'
     },
     {
-      title: 'Cybersecurity',
-      description: 'Building modern, responsive, and user-friendly web applications',
-      icon: '🌐'
+      title: 'Systems Engineering',
+      description: 'Building robust and efficient foundational software, optimizing performance, and working with operating system internals and compilers.',
+      icon: '⚙️'
     },
     {
-      title: 'Some other big thing',
-      description: 'Designing scalable and efficient cloud-based solutions',
-      icon: '☁️'
+      title: 'Software Security',
+      description: 'Applying secure coding principles and best practices to develop resilient and trustworthy software applications.',
+      icon: '🔒'
     }
   ];
 
   const stats = [
-    { label: 'Years Experience', value: '5+' },
-    { label: 'Projects Completed', value: '50+' },
-    { label: 'Happy Clients', value: '30+' },
-    { label: 'GitHub Stars', value: '1k+' }
+    { label: 'Job Experience', value: '4' },
+    { label: 'University Year', value: '3' },
+    { label: 'GPA', value: '3.9' },
+    { label: 'Practical Projects', value: '10+' }
   ];
 
   return (
@@ -39,7 +39,7 @@ const About: React.FC<AboutProps> = ({ className }) => {
             About Me
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Get to know more about my journey and expertise
+            Get to know more about me!
           </p>
         </div>
 
@@ -49,11 +49,15 @@ const About: React.FC<AboutProps> = ({ className }) => {
             <h3 className="text-2xl font-semibold text-gray-900 mb-4">
               My Story
             </h3>
-            <p className="text-gray-600 mb-6">
-              I'm a passionate software engineer with a strong foundation in computer science and a keen eye for creating elegant solutions. My journey in tech began with a curiosity about how things work, which evolved into a deep love for building impactful software.
+            <p className="text-gray-600 mb-6 text-lg ">
+            My drive for strategic problem-solving and effective teamwork has been shaped by years of engagement with activities like chess and soccer. 
+            These experiences have instilled in me a dedication to strategic thinking and collaborating, qualities I directly apply to software engineering. 
+            As an intern, I bring a robust foundation in computer science and math with a deep fascination for how software powers our world. 
+            I'm eager to dive into diverse areas, from the intricacies of artificial intelligence to the core of low-level systems and the complexities of security software, always striving to transform challenging problems into elegant and high-performing solutions.
+             I'm committed to continuous learning and incredibly excited to make an impactful contribution as part of a forward-thinking team.
             </p>
             <p className="text-gray-600">
-              With expertise in full-stack development, cloud architecture, and artificial intelligence, I strive to create solutions that not only solve problems but also provide exceptional user experiences.
+              
             </p>
           </div>
 
@@ -64,12 +68,10 @@ const About: React.FC<AboutProps> = ({ className }) => {
                 key={interest.title}
                 className="bg-white/40 backdrop-blur-xl rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/20"
               >
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 rounded-full bg-white/60 backdrop-blur-sm flex items-center justify-center shadow-lg">
-                    <span className="text-2xl">{interest.icon}</span>
-                  </div>
+                <div className="flex items-start">
                   <div>
-                    <h4 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h4 className="text-xl font-semibold text-gray-900 mb-2 flex items-center">
+                      <span className="mr-2 text-2xl">{interest.icon}</span>
                       {interest.title}
                     </h4>
                     <p className="text-gray-600">

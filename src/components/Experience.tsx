@@ -44,6 +44,20 @@ const Experience: React.FC<ExperienceProps> = ({ className }) => {
       ],
       technologies: ['Vue.js', 'Python', 'PostgreSQL', 'Redis'],
       year: 2019
+    },
+    {
+      title: 'Software Engineer',
+      company: 'Digital Solutions Ltd.',
+      location: 'Seattle, WA',
+      period: '2019 - 2021',
+      description: 'Developed and maintained enterprise-level web applications.',
+      achievements: [
+        'Built a real-time analytics dashboard processing 100K+ events daily',
+        'Implemented CI/CD pipelines reducing deployment time by 60%',
+        'Collaborated with UX team to improve user engagement by 35%'
+      ],
+      technologies: ['Vue.js', 'Python', 'PostgreSQL', 'Redis'],
+      year: 2017
     }
   ].sort((a, b) => b.year - a.year);
 
@@ -63,92 +77,107 @@ const Experience: React.FC<ExperienceProps> = ({ className }) => {
         {/* Timeline */}
         <div className="relative">
           {/* Timeline Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-purple-500 to-purple-300"></div>
+          <div className="hidden md:block absolute left-1/2 top-0 h-full w-1 -translate-x-1/2 bg-gradient-to-b from-purple-400 via-purple-200 to-blue-200 z-0"></div>
 
-          {/* Experience Cards */}
-          <div className="space-y-24">
+          <div className="flex flex-col gap-16">
             {experiences.map((exp, index) => (
-              <div
-                key={exp.title}
-                className={`relative flex items-center ${
-                  index % 2 === 0 ? 'justify-start' : 'justify-end'
-                }`}
-              >
-                {/* Year Label */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-purple-600 text-white px-6 py-2 rounded-full shadow-lg z-10">
-                  {exp.year}
-                </div>
-
-                {/* Experience Card */}
-                <div 
-                  className={`w-[45%] transform transition-all duration-500 hover:scale-105 ${
-                    index % 2 === 0 ? 'mr-auto' : 'ml-auto'
-                  }`}
-                >
-                  <div className="bg-white/40 backdrop-blur-xl rounded-xl p-6 shadow-lg border border-white/20 hover:shadow-xl transition-all duration-300">
-                    {/* Title and Company */}
-                    <div className="mb-4">
+              <div key={exp.title} className="relative flex flex-col md:flex-row md:items-center">
+                {/* Left Side (Card or Spacer) */}
+                <div className={`md:w-1/2 flex ${index % 2 === 0 ? 'justify-end' : 'justify-start'} md:pr-8 md:pl-0 md:order-${index % 2 === 0 ? '1' : '3'} order-2`}> 
+                  {index % 2 === 0 ? (
+                    <div className="w-full md:max-w-3xl bg-white/20 backdrop-blur-xl rounded-xl p-10 shadow-lg hover:shadow-xl transition-all duration-300">
                       <h3 className="text-xl font-bold text-gray-900 mb-1">{exp.title}</h3>
-                      <p className="text-lg text-purple-600 font-medium">{exp.company}</p>
-                    </div>
-
-                    {/* Location and Period */}
-                    <div className="flex items-center space-x-6 mb-4">
-                      <div className="flex items-center text-gray-600">
-                        <svg className="w-5 h-5 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <p className="text-lg text-purple-600 font-medium mb-2">{exp.company}</p>
+                      <div className="flex items-center text-gray-600 text-sm mb-2">
+                        <svg className="w-4 h-4 mr-1 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                         </svg>
                         {exp.location}
-                      </div>
-                      <div className="flex items-center text-gray-600">
-                        <svg className="w-5 h-5 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 mx-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                         </svg>
                         {exp.period}
                       </div>
-                    </div>
-
-                    {/* Description */}
-                    <p className="text-gray-600 mb-4">
-                      {exp.description}
-                    </p>
-
-                    {/* Achievements */}
-                    <div className="mb-4">
-                      <h4 className="text-sm font-semibold text-gray-900 mb-2">
-                        Key Achievements
-                      </h4>
-                      <ul className="space-y-2">
-                        {exp.achievements.map((achievement, idx) => (
-                          <li
-                            key={idx}
-                            className="flex items-start space-x-2 text-gray-600"
-                          >
-                            <span className="text-purple-500 mt-1">•</span>
-                            <span>{achievement}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Technologies */}
-                    <div>
-                      <h4 className="text-sm font-semibold text-gray-900 mb-2">
-                        Technologies Used
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {exp.technologies.map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-3 py-1 bg-white/60 backdrop-blur-sm rounded-full text-gray-700 text-sm"
-                          >
-                            {tech}
-                          </span>
-                        ))}
+                      <p className="text-gray-600 text-lg mb-4">{exp.description}</p>
+                      <div className="mb-2">
+                        <h4 className="text-xs font-semibold text-gray-900 mb-1">Key Achievements</h4>
+                        <ul className="space-y-2">
+                          {exp.achievements.map((achievement, idx) => (
+                            <li key={idx} className="flex items-start space-x-2 text-gray-700 text-base">
+                              <span className="text-purple-500 mt-1">•</span>
+                              <span>{achievement}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-semibold text-gray-900 mb-1">Technologies Used</h4>
+                        <div className="flex flex-wrap gap-2 mt-2">
+                          {exp.technologies.map((tech) => (
+                            <span key={tech} className="px-3 py-1 bg-white/60 backdrop-blur-sm rounded-full text-gray-800 text-base">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
+                  ) : (
+                    <div className="hidden md:block w-full md:max-w-3xl"></div>
+                  )}
+                </div>
+
+                {/* Timeline Year Badge */}
+                <div className="flex flex-col items-center z-10 order-1 md:order-2">
+                  <div className="bg-purple-600 text-white px-6 py-2 rounded-full shadow-lg mb-4 md:mb-0">
+                    {exp.year}
                   </div>
+                  <div className="hidden md:block w-1 h-full bg-gradient-to-b from-purple-400 via-purple-200 to-blue-200"></div>
+                </div>
+
+                {/* Right Side (Card or Spacer) */}
+                <div className={`md:w-1/2 flex ${index % 2 !== 0 ? 'justify-start' : 'justify-end'} md:pl-8 md:pr-0 md:order-${index % 2 !== 0 ? '3' : '1'} order-3`}>
+                  {index % 2 !== 0 ? (
+                    <div className="w-full md:max-w-3xl bg-white/20 backdrop-blur-xl rounded-xl p-10 shadow-lg hover:shadow-xl transition-all duration-300">
+                      <h3 className="text-xl font-bold text-gray-900 mb-1">{exp.title}</h3>
+                      <p className="text-lg text-purple-600 font-medium mb-2">{exp.company}</p>
+                      <div className="flex items-center text-gray-600 text-sm mb-2">
+                        <svg className="w-4 h-4 mr-1 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        {exp.location}
+                        <svg className="w-4 h-4 mx-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        {exp.period}
+                      </div>
+                      <p className="text-gray-600 text-lg mb-4">{exp.description}</p>
+                      <div className="mb-2">
+                        <h4 className="text-xs font-semibold text-gray-900 mb-1">Key Achievements</h4>
+                        <ul className="space-y-2">
+                          {exp.achievements.map((achievement, idx) => (
+                            <li key={idx} className="flex items-start space-x-2 text-gray-700 text-base">
+                              <span className="text-purple-500 mt-1">•</span>
+                              <span>{achievement}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="text-xs font-semibold text-gray-900 mb-1">Technologies Used</h4>
+                        <div className="flex flex-wrap gap-2 mt-2">
+                          {exp.technologies.map((tech) => (
+                            <span key={tech} className="px-3 py-1 bg-white/60 backdrop-blur-sm rounded-full text-gray-800 text-base">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="hidden md:block w-full md:max-w-3xl"></div>
+                  )}
                 </div>
               </div>
             ))}
