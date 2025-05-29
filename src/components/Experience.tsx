@@ -46,7 +46,7 @@ const Experience: React.FC<ExperienceProps> = ({ className }) => {
       year: 2019
     },
     {
-      title: 'Software Engineer',
+      title: 'Software Engneer',
       company: 'Digital Solutions Ltd.',
       location: 'Seattle, WA',
       period: '2019 - 2021',

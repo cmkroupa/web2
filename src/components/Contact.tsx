@@ -15,6 +15,8 @@ const Contact: React.FC<ContactProps> = ({ className }) => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   // Validation
   const isNameValid = formData.name.trim().length > 0;
   const isEmailValid = /^\S+@\S+\.\S+$/.test(formData.email);
@@ -32,39 +34,53 @@ const Contact: React.FC<ContactProps> = ({ className }) => {
     setIsSubmitting(true);
     setError(null);
     setIsSuccess(false);
+
+
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch(`/api/contact`, { 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
+
       let data = null;
       let backendError = '';
       try {
+        // Attempt to read and parse the response text
         const text = await res.text();
         data = text ? JSON.parse(text) : null;
       } catch (e) {
+        // If parsing fails, it means the response was not valid JSON (e.g., empty, plain text error)
         data = null;
       }
+
       if (!res.ok) {
+        // If response status is not 2xx, it's an error from the backend
         backendError = (data && (data.error || data.message)) || res.statusText || 'Unknown error';
         setError(`Error ${res.status}: ${backendError}`);
-        // For debugging: log the full response
         console.error('Contact form error:', { status: res.status, data, backendError });
         return;
       }
-      if (!data || !data._id) {
-        setError('Message was not saved in the database.');
-        console.error('Contact form: No _id returned', { data });
+
+      // Check for expected success data from your Express backend
+      // Your Express backend sends { message: 'Message sent successfully!', contactId: newContact._id }
+      if (!data || !(data.message || data.contactId)) {
+        setError('Message was sent, but response from server was unexpected.');
+        console.error('Contact form: Unexpected response from backend', { data });
         return;
       }
+
       setIsSuccess(true);
+      // Clear the form only on successful submission
       setFormData({ name: '', email: '', message: '' });
+
     } catch (err: any) {
-      setError('Network or unexpected error: ' + (err.message || err.toString()));
+      // Catch network errors (e.g., server not running, CORS issues if not configured correctly)
+      setError('Network or unexpected error: ' + (err.message || 'An unknown network error occurred.'));
       console.error('Contact form network/unexpected error:', err);
     } finally {
       setIsSubmitting(false);
+      // Hide success message after 3 seconds
       setTimeout(() => setIsSuccess(false), 3000);
     }
   };
@@ -254,4 +270,4 @@ const Contact: React.FC<ContactProps> = ({ className }) => {
   );
 };
 
-export default Contact; 
+export default Contact;
