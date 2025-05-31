@@ -94,17 +94,12 @@ const Contact: React.FC<ContactProps> = ({ className }) => {
     {
       name: 'GitHub',
       icon: '📦',
-      url: 'https://github.com/yourusername'
+      url: 'https://github.com/cmkroupa'
     },
     {
       name: 'LinkedIn',
       icon: '💼',
-      url: 'https://linkedin.com/in/yourusername'
-    },
-    {
-      name: 'Twitter',
-      icon: '🐦',
-      url: 'https://twitter.com/yourusername'
+      url: 'www.linkedin.com/in/cameron-kroupa-7404ba289'
     }
   ];
 
@@ -219,7 +214,7 @@ const Contact: React.FC<ContactProps> = ({ className }) => {
                   </div>
                   <div>
                     <p className="text-sm text-gray-600">Email</p>
-                    <p className="text-gray-900">your.email@example.com</p>
+                    <p className="text-gray-900">ckroupa@uwo.ca</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4">
@@ -228,16 +223,7 @@ const Contact: React.FC<ContactProps> = ({ className }) => {
                   </div>
                   <div>
                     <p className="text-sm text-gray-600">Phone</p>
-                    <p className="text-gray-900">+1 (555) 123-4567</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 rounded-full bg-white/60 backdrop-blur-sm flex items-center justify-center shadow-lg">
-                    <span className="text-2xl">📍</span>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-600">Location</p>
-                    <p className="text-gray-900">San Francisco, CA</p>
+                    <p className="text-gray-900">+1 (647) 612-4670</p>
                   </div>
                 </div>
               </div>

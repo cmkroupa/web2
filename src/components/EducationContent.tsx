@@ -27,17 +27,17 @@ const EducationContent: React.FC<EducationContentProps> = ({ className }) => {
 
     const education: Education[] = [
         {
-            degree: 'Master of Science in Computer Science',
-            school: 'Stanford University',
-            location: 'Stanford, CA',
-            period: '2018 - 2020',
+            degree: 'Specialization in Computer Science',
+            school: 'Western University',
+            location: 'London, ON',
+            period: '2023 - 2028',
             gpa: '3.9/4.0',
-            description: 'Specialized in Artificial Intelligence and Machine Learning. Conducted research in natural language processing and computer vision.',
+            description: 'Gives a strong foundation in all aspects of computer science.',
             courses: [
                 {
-                    name: 'Advanced Machine Learning',
-                    description: 'Comprehensive study of modern machine learning techniques and their applications.',
-                    topics: ['Neural Networks', 'Deep Learning', 'Reinforcement Learning', 'Natural Language Processing']
+                    name: 'Computer Organization & Architecture',
+                    description: 'This course gives an understanding of what a modern computer can do. It covers the internal representation of various data types and focuses on the architectural components of computers (how these components are interconnected and the nature of the information flow between them). Assembly language is used to reinforce these issues.',
+                    topics: ['Assembly', 'Low Level Memory Management']
                 },
                 {
                     name: 'Deep Learning Systems',
@@ -45,58 +45,53 @@ const EducationContent: React.FC<EducationContentProps> = ({ className }) => {
                     topics: ['CNN', 'RNN', 'Transformer Models', 'Model Optimization']
                 },
                 {
-                    name: 'Natural Language Processing',
-                    description: 'Advanced techniques in processing and understanding human language.',
-                    topics: ['Text Classification', 'Named Entity Recognition', 'Machine Translation', 'Question Answering']
+                    name: 'Data Structures & Algorithms',
+                    description: 'Lists, stacks, queues, priority queues, trees, graphs, and their associated algorithms; file structures; sorting, searching, and hashing techniques; time and space complexity.',
+                    topics: ['Stacks & Queues', 'B Trees', '2-4 Trees', 'Graphs', 'Hashing', 'Sorting', 'Searching']
                 },
                 {
-                    name: 'Computer Vision',
-                    description: 'Study of algorithms and techniques for processing visual information.',
-                    topics: ['Image Classification', 'Object Detection', 'Image Segmentation', 'Video Analysis']
-                },
-                {
-                    name: 'Distributed Systems',
-                    description: 'Design and implementation of large-scale distributed computing systems.',
-                    topics: ['Consistency Models', 'Fault Tolerance', 'Scalability', 'Distributed Algorithms']
-                }
-            ],
-            year: 2018
-        },
-        {
-            degree: 'Bachelor of Science in Computer Science',
-            school: 'University of California, Berkeley',
-            location: 'Berkeley, CA',
-            period: '2014 - 2018',
-            gpa: '3.8/4.0',
-            description: 'Focused on software engineering and data structures. Participated in various hackathons and coding competitions.',
-            courses: [
-                {
-                    name: 'Data Structures and Algorithms',
-                    description: 'Comprehensive study of fundamental data structures and algorithmic techniques.',
-                    topics: ['Sorting Algorithms', 'Graph Theory', 'Dynamic Programming', 'Complexity Analysis']
+                    name: 'Unix & C',
+                    description: 'An introduction to software tools and systems programming. Topics include: understanding how programs execute (compilation, linking and loading); an introduction to a complex operating system (UNIX); scripting languages; the C programming language; system calls; memory management; libraries; multi-component program organization and builds; version control; debuggers and profilers.',
+                    topics: ['Unix', 'C', 'System Calls', 'Memory Management', 'Libraries', 'Debuggers and Profilers']
                 },
                 {
                     name: 'Software Engineering',
-                    description: 'Principles and practices of modern software development.',
-                    topics: ['Design Patterns', 'Testing', 'Version Control', 'Agile Methodologies']
+                    description: 'A team project course that provides practical experience in the software engineering field. Introduction to the structure and unique characteristics of large software systems, and concepts and techniques in the design, management and implementation of large software systems.',
+                    topics: ['Software Engineering', 'Software Design', 'Software Development', 'Software Testing', 'Software Maintenance']
                 },
                 {
-                    name: 'Database Systems',
-                    description: 'Study of database design, implementation, and optimization.',
-                    topics: ['SQL', 'NoSQL', 'Transaction Management', 'Query Optimization']
-                },
-                {
-                    name: 'Operating Systems',
-                    description: 'Study of operating system concepts and implementation.',
-                    topics: ['Process Management', 'Memory Management', 'File Systems', 'Concurrency']
-                },
-                {
-                    name: 'Computer Networks',
-                    description: 'Study of network protocols and distributed systems.',
-                    topics: ['TCP/IP', 'Network Security', 'Routing', 'Distributed Applications']
+                    name: 'Artificial Intelligence',
+                    description: 'Introduction to Artificial Intelligence; logic programming; heuristic search; knowledge representation; expert systems.',
+                    topics: ['Learning Agents', 'Heuristic Search', 'kMeans', 'kNN', 'Decision Trees', 'Naive Bayes', 'Neural Networks', 'Transformer Model']
                 }
             ],
-            year: 2014
+            year: 2028
+        },
+        {
+            degree: 'Major in Mathematics',
+            school: 'Western University',
+            location: 'London, ON',
+            period: '2023 - 2028',
+            gpa: '3.9/4.0',
+            description: 'Courses taken focus on uses in artificial intelligence and cybersecurity.',
+            courses: [
+                {
+                    name: 'Calculus II',
+                    description: 'Techniques of integration; The Mean Value Theorem and its consequences; series, Taylor series with applications; parametric and polar curves with applications; first order linear and separable differential equations with applications.',
+                    topics: ['Integration', 'MVT', 'Taylor Series', 'Parametric and Polar Curves', 'Differential Equations']
+                },
+                {
+                    name: 'Applied Logic',
+                    description: 'Propositional and predicate logic; representing static and dynamic properties of real-world systems; logic as a tool for representation, reasoning and calculation; logic and programming.',
+                    topics: ['Propositional Logic', 'Predicate Logic', 'Logic as a Tool', 'Logic and Programming']
+                },
+                {
+                    name: 'Linear Algebra II',
+                    description: 'The Gram-Schmidt process; similarity and orthogonal diagonalization; abstract vector spaces and linear transformations over arbitrary fields; change of basis; inner product spaces; norms and distance; least squares and Fourier approximation; singular value decomposition. Applications to differential equations and other topics will be emphasized throughout the course.',
+                    topics: ['Abstract Vector Spaces', 'Linear Transformations', 'Change of Basis', 'Inner Product Spaces', 'Norms and Distance', 'Least Squares and Fourier Approximation', 'Singular Value Decomposition']
+                },
+            ],
+            year: 2028
         }
     ].sort((a, b) => b.year - a.year);
 
@@ -114,7 +109,7 @@ const EducationContent: React.FC<EducationContentProps> = ({ className }) => {
                         </p>
                         <div className="mt-4 flex items-center justify-center space-x-2">
                             <span className="text-yellow-500 text-2xl">★</span>
-                            <span className="text-gray-700 font-medium">Overall GPA: 3.85/4.0</span>
+                            <span className="text-gray-700 font-medium">Overall GPA: 3.9/4.0</span>
                         </div>
                     </div>
 

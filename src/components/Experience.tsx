@@ -18,46 +18,42 @@ interface Experience {
 const Experience: React.FC<ExperienceProps> = ({ className }) => {
   const experiences: Experience[] = [
     {
-      title: 'Senior Software Engineer',
-      company: 'Tech Innovations Inc.',
-      location: 'San Francisco, CA',
-      period: '2021 - Present',
-      description: 'Leading the development of cloud-native applications and microservices architecture.',
+      title: 'Design Software Engineer',
+      company: 'Evertz',
+      location: 'Ontario, ON',
+      period: 'May 2025 - Sept 2025',
+      description: 'Developed software for easier debugging and making the software more efficient.',
       achievements: [
-        'Architected and implemented a scalable microservices platform serving 1M+ users',
-        'Reduced system latency by 40% through optimization and caching strategies',
-        'Mentored junior developers and conducted code reviews'
+        'Developed a LTTNG tracing script that when run could give kernel and function level debugging information',
+        'Streamlined the serialization/deserialization process for less latency',
+        'Built an SDP parser'
       ],
-      technologies: ['React', 'Node.js', 'AWS', 'Docker', 'Kubernetes'],
-      year: 2021
+      technologies: ['C++','LTTNG Tracing'],
+      year: 2025
     },
     {
-      title: 'Software Engineer',
-      company: 'Digital Solutions Ltd.',
-      location: 'Seattle, WA',
-      period: '2019 - 2021',
-      description: 'Developed and maintained enterprise-level web applications.',
+      title: 'Salesforce Developer',
+      company: 'United Services Group',
+      location: 'Ontario, ON',
+      period: 'May 2024 - Sept 2024',
+      description: "Utilized advanced attention to detail and data modeling skills to develop division overview dashboards, providing a comprehensive analysis of key performance indicators, profitability, and other metrics. This initiative empowered management teams to make data-driven decisions that improved operational efficiency and strategic planning. The dashboards also enabled real-time tracking of performance, offering greater transparency and insights into the business's financial health and overall performance.",
       achievements: [
-        'Built a real-time analytics dashboard processing 100K+ events daily',
-        'Implemented CI/CD pipelines reducing deployment time by 60%',
-        'Collaborated with UX team to improve user engagement by 35%'
+        'Built a real-time analytics dashboard for  Senior managers to use for daily concise overview analytics'
       ],
-      technologies: ['Vue.js', 'Python', 'PostgreSQL', 'Redis'],
-      year: 2019
+      technologies: ['Salesforce'],
+      year: 2024
     },
     {
-      title: 'Software Engneer',
-      company: 'Digital Solutions Ltd.',
-      location: 'Seattle, WA',
-      period: '2019 - 2021',
-      description: 'Developed and maintained enterprise-level web applications.',
+      title: 'Backend Salesforce Developer',
+      company: 'United Services Group',
+      location: 'Brampton, ON',
+      period: 'May 2023 - Sept 2023',
+      description: 'Leveraged strong technical expertise in Salesforce development to establish and streamline data entry processes, creating an intuitive and efficient resource that guided employees through daily tasks. Additionally, developed a quality control system that enabled managers to assess service delivery with enhanced precision, ensuring compliance with company standards and contributing to a higher level of service excellence.',
       achievements: [
-        'Built a real-time analytics dashboard processing 100K+ events daily',
-        'Implemented CI/CD pipelines reducing deployment time by 60%',
-        'Collaborated with UX team to improve user engagement by 35%'
+        'Built a real-time checklist for managers to use for quality control '
       ],
-      technologies: ['Vue.js', 'Python', 'PostgreSQL', 'Redis'],
-      year: 2017
+      technologies: ['Salesforce'],
+      year: 2023
     }
   ].sort((a, b) => b.year - a.year);
 
