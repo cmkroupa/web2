@@ -44,3 +44,7 @@ dist-ssr
 .env.development.local
 .env.test.local
 .env.production.local
+
+
+/etc/secret/*
+/etc/secret/MongoDB_Cloud_X509_Cert.pem
