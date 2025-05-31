@@ -8,23 +8,23 @@ const About: React.FC<AboutProps> = ({ className }) => {
   const interests = [
     {
       title: 'Artificial Intelligence',
-      description: 'Designing and implementing intelligent algorithms for data analysis, pattern recognition, and advanced decision-making systems.',
+      description: 'Creating smart systems that can learn, adapt, and solve real-world problems.',
       icon: '🤖'
     },
     {
-      title: 'Systems Engineering',
-      description: 'Building robust and efficient foundational software, optimizing performance, and working with operating system internals and compilers.',
+      title: 'Low Level Systems',
+      description: 'Designing and optimizing the core software that powers computers and devices.',
       icon: '⚙️'
     },
     {
       title: 'Software Security',
-      description: 'Applying secure coding principles and best practices to develop resilient and trustworthy software applications.',
+      description: 'Building safe, reliable software to protect data from all sorts of cyber threats.',
       icon: '🔒'
     }
   ];
 
   const stats = [
-    { label: 'Job Experience', value: '4' },
+    { label: 'Jobs', value: '4' },
     { label: 'University Year', value: '3' },
     { label: 'GPA', value: '3.9' },
     { label: 'Practical Projects', value: '10+' }
@@ -45,24 +45,22 @@ const About: React.FC<AboutProps> = ({ className }) => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Story */}
-          <div className="bg-white/40 backdrop-blur-xl rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/20">
-            <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-              My Story
-            </h3>
-            <p className="text-gray-600 mb-6 text-lg ">
-            My drive for strategic problem-solving and effective teamwork has been shaped by years of engagement with activities like chess and soccer. 
-            These experiences have instilled in me a dedication to strategic thinking and collaborating, qualities I directly apply to software engineering. 
-            As an intern, I bring a robust foundation in computer science and math with a deep fascination for how software powers our world. 
-            I'm eager to dive into diverse areas, from the intricacies of artificial intelligence to the core of low-level systems and the complexities of security software, always striving to transform challenging problems into elegant and high-performing solutions.
-             I'm committed to continuous learning and incredibly excited to make an impactful contribution as part of a forward-thinking team.
-            </p>
-            <p className="text-gray-600">
-              
-            </p>
+          <div>
+            <h3 className="text-2xl font-semibold text-gray-900 mb-4">My Story</h3>
+            <div className="bg-white/40 backdrop-blur-xl rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-white/20">
+              <p className="text-gray-600 mb-6 text-lg ">
+                I'm a third-year Computer Science and Math student at the University of Western, with a strong focus on low-level systems, artificial intelligence, and software security.
+                Beyond my studies, I've enjoyed playing chess since I was 3 which gives me a unique perspective for stragtegical thinking through problems. 
+                I'm driven by a desire to learn and tackle complex challenges, always looking for opportunities to deepen my understanding and practical skills. 
+                Below, you'll find a selection of my projects. 
+                Feel free to send me a message via the contact form.
+              </p>
+            </div>
           </div>
 
           {/* Interests */}
           <div className="space-y-6">
+            <h3 className="text-2xl font-semibold text-gray-900 mb-4">Interests</h3>
             {interests.map((interest) => (
               <div
                 key={interest.title}
