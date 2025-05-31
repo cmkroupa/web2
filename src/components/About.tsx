@@ -27,7 +27,7 @@ const About: React.FC<AboutProps> = ({ className }) => {
     { label: 'Jobs', value: '4' },
     { label: 'University Year', value: '3' },
     { label: 'GPA', value: '3.9' },
-    { label: 'Practical Projects', value: '10+' }
+    { label: 'Practical Projects', value: '7' }
   ];
 
   return (

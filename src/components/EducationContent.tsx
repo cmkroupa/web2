@@ -174,17 +174,17 @@ const EducationContent: React.FC<EducationContentProps> = ({ className }) => {
                     {/* Course Modal */}
                     {selectedCourse && (
                         <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center p-4 z-50 transition-all duration-300">
-                            <div className="bg-white/60 backdrop-blur-md rounded-lg p-8 max-w-2xl w-full shadow-lg border border-white/20 transform transition-all duration-300">
+                            <div className="bg-white/60 backdrop-blur-md rounded-lg p-8 max-w-2xl w-full shadow-lg border border-white/20 transform transition-all duration-300 relative">
+                                {/* Red X Close Button */}
+                                <button
+                                    onClick={() => setSelectedCourse(null)}
+                                    className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-red-600 hover:bg-red-700 text-white text-2xl font-bold shadow-lg z-50 transition-colors duration-200"
+                                    aria-label="Close"
+                                >
+                                    &times;
+                                </button>
                                 <div className="flex justify-between items-start mb-6">
                                     <h3 className="text-2xl font-bold text-gray-900">{selectedCourse.name}</h3>
-                                    <button
-                                        onClick={() => setSelectedCourse(null)}
-                                        className="text-gray-500 hover:text-gray-700 transition-colors duration-300"
-                                    >
-                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"/>
-                                        </svg>
-                                    </button>
                                 </div>
 
                                 <p className="text-gray-700 mb-6">

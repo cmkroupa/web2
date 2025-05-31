@@ -7,112 +7,60 @@ interface ProjectsProps {
 interface Project {
     title: string;
     description: string;
-    image: string;
+    src: string;
     technologies: string[];
-    features: string[];
-    challenges: string[];
-    solutions: string[];
-    color: string;
-    category: 'web' | 'mobile' | 'ai' | 'other';
-    icon: string;
     github: string;
 }
 
 const Projects: React.FC<ProjectsProps> = ({ className }) => {
     const [activeProject, setActiveProject] = useState<Project | null>(null);
-    const [activeCategory, setActiveCategory] = useState<string>('all');
+    const [activeTech, setActiveTech] = useState<string>('all');
 
     const projects: Project[] = [
         {
-            title: 'AI-Powered Analytics Dashboard',
-            description: 'A real-time analytics platform with machine learning predictions and interactive visualizations.',
-            image: '/path-to-project-image.jpg',
-            technologies: ['React', 'TensorFlow.js', 'D3.js', 'Node.js'],
-            features: [
-                'Real-time data processing',
-                'ML-powered predictions',
-                'Interactive visualizations',
-                'Custom reporting'
-            ],
-            challenges: [
-                'Processing large datasets in real-time',
-                'Implementing accurate ML models',
-                'Optimizing visualization performance'
-            ],
-            solutions: [
-                'Used WebWorkers for data processing',
-                'Implemented transfer learning for faster ML',
-                'Created custom D3.js optimizations'
-            ],
-            color: '#6366F1',
-            category: 'ai',
-            icon: '🤖',
-            github: 'https://github.com/yourusername/project1'
+            title: 'Virtual Pet Game',
+            description: 'A term-long project where we designed and implemented a virtual pet game, including requirements gathering, UML diagrams, and UI mockups. Then in 2 weeks we coded the actual project.',
+            src: '/virtual_pet.mov',
+            technologies: ['Java', 'UML Diagrams'],
+            github: 'https://github.com/cmkroupa/VirtualPet'
         },
         {
-            title: 'E-Commerce Platform',
-            description: 'A full-stack e-commerce solution with real-time inventory and payment processing.',
-            image: '/path-to-project-image.jpg',
-            technologies: ['Next.js', 'Node.js', 'MongoDB', 'Stripe'],
-            features: [
-                'Real-time inventory tracking',
-                'Secure payment processing',
-                'User authentication',
-                'Admin dashboard'
-            ],
-            challenges: [
-                'Handling concurrent transactions',
-                'Implementing secure payments',
-                'Managing real-time updates'
-            ],
-            solutions: [
-                'Used optimistic locking',
-                'Implemented Stripe integration',
-                'Utilized WebSocket for real-time'
-            ],
-            color: '#EC4899',
-            category: 'web',
-            icon: '🛍️',
-            github: 'https://github.com/yourusername/project2'
+            title: 'LatticeTalk',
+            description: "Current encryption methods, such as RSA, are vulnerable to quantum attacks using Shor's Algorithm. To address this, we leveraged research in post-quantum encryption to develop a JavaScript application that implements lattice-based encryption, ensuring quantum security. This application provides a highly secure, peer-to-peer messaging system.",
+            src: '/lattice_talk.jpg',
+            technologies: ['React', 'MongoDB', 'GitHub','Postman'],
+            github: 'https://github.com/kalpipatel/LatticeTalk'
         },
         {
-            title: 'Mobile Fitness App',
-            description: 'A cross-platform fitness application with workout tracking and social features.',
-            image: '/path-to-project-image.jpg',
-            technologies: ['React Native', 'Firebase', 'Redux', 'Node.js'],
-            features: [
-                'Workout tracking',
-                'Social features',
-                'Progress analytics',
-                'Custom workout plans'
-            ],
-            challenges: [
-                'Cross-platform compatibility',
-                'Offline functionality',
-                'Real-time social features'
-            ],
-            solutions: [
-                'Used React Native for cross-platform',
-                'Implemented local storage',
-                'Utilized Firebase for real-time'
-            ],
-            color: '#10B981',
-            category: 'mobile',
-            icon: '💪',
-            github: 'https://github.com/yourusername/project3'
+            title: 'GoFundUs',
+            description: "Current encryption methods, such as RSA, are vulnerable to quantum attacks using Shor's Algorithm. To address this, we leveraged research in post-quantum encryption to develop a JavaScript application that implements lattice-based encryption, ensuring quantum security. This application provides a highly secure, peer-to-peer messaging system.",
+            src: '/GoFundUs.jpg',
+            technologies: ['React', 'Typescript', 'GitHub','Postman'],
+            github: 'https://github.com/AlexanderKubarakos/CodenameGoFundUs'
+        },
+        {
+            title: 'C Scripted Calendar App',
+            description: "Developed a feature-rich calendar application in C, enabling users to seamlessly store, manage, and organize reminders. The calendar intelligently detects the current month and accurately aligns dates based on the starting day. Users can add multiple reminders per day, as well as edit or delete them as needed.",
+            src: '/calendar.jpg',
+            technologies: ['C', 'Bash'],
+            github: 'https://github.com/cmkroupa/C_Calendar'
+        },
+        {
+            title: 'Maze Solver',
+            description: "This maze solver utilizes a Depth-First Search (DFS) algorithm to explore and find the first path out of the maze, ensuring an efficient and systematic approach. The maze is composed of hallways where coins are placed, and these coins are required to progress through each hallway. The solver is designed to navigate the maze while keeping the total coin usage below a predefined limit.",
+            src: '/maze.jpg',
+            technologies: ['Java', 'DFS'],
+            github: 'https://github.com/cmkroupa/MazeGame'
         }
     ];
 
-    const categories = [
-        { id: 'all', name: 'All Projects', icon: '✨' },
-        { id: 'web', name: 'Web Apps', icon: '🌐' },
-        { id: 'mobile', name: 'Mobile Apps', icon: '📱' },
-        { id: 'ai', name: 'AI/ML', icon: '🤖' }
-    ];
+    // Get unique technologies from all projects
+    const allTechnologies = Array.from(new Set(projects.flatMap(p => p.technologies)));
+    const techFilters = ['all', ...allTechnologies];
 
-    const filteredProjects = activeCategory === 'all' 
-        ? projects 
-        : projects.filter(project => project.category === activeCategory);
+    const filteredProjects = activeTech === 'all'
+        ? projects
+        : projects.filter(project => project.technologies.includes(activeTech));
 
     return (
         <section id="projects" className="relative min-h-screen flex items-center justify-center">
@@ -127,20 +75,19 @@ const Projects: React.FC<ProjectsProps> = ({ className }) => {
                     </p>
                 </div>
 
-                {/* Category Filter */}
-                <div className="flex justify-center space-x-4 mb-12">
-                    {categories.map(category => (
+                {/* Technology Filter */}
+                <div className="flex flex-wrap justify-center gap-4 mb-12">
+                    {techFilters.map(tech => (
                         <button
-                            key={category.id}
-                            onClick={() => setActiveCategory(category.id)}
+                            key={tech}
+                            onClick={() => setActiveTech(tech)}
                             className={`px-6 py-2 rounded-full transition-all duration-300 transform hover:scale-105 ${
-                                activeCategory === category.id
+                                activeTech === tech
                                     ? 'bg-purple-600 text-white shadow-lg'
                                     : 'bg-white/40 backdrop-blur-sm text-gray-600 hover:bg-white/60'
                             }`}
                         >
-                            <span className="mr-2 text-lg leading-none">{category.icon}</span>
-                            {category.name}
+                            {tech === 'all' ? 'All Projects' : tech}
                         </button>
                     ))}
                 </div>
@@ -153,14 +100,26 @@ const Projects: React.FC<ProjectsProps> = ({ className }) => {
                             onClick={() => setActiveProject(project)}
                             className="bg-white/20 backdrop-blur-xl rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer"
                         >
-                            {/* Project Image */}
-                            <div className="relative h-48 overflow-hidden">
-                                <img
-                                    src={project.image}
-                                    alt={project.title}
-                                    className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            {/* Project Media */}
+                            <div className="relative h-48 overflow-hidden flex items-center justify-center">
+                                {project.src.match(/\.(mp4|mov|webm)$/i) ? (
+                                    <video
+                                        src={project.src}
+                                        className="w-full h-full object-cover mx-auto"
+                                        autoPlay
+                                        loop
+                                        muted
+                                        controls
+                                        playsInline
+                                        poster="/video_poster.jpg"
+                                    />
+                                ) : (
+                                    <img
+                                        src={project.src}
+                                        alt={project.title}
+                                        className="w-full h-full object-cover mx-auto"
+                                    />
+                                )}
                             </div>
 
                             {/* Project Content */}
@@ -210,31 +169,40 @@ const Projects: React.FC<ProjectsProps> = ({ className }) => {
                 {/* Project Modal */}
                 {activeProject && (
                     <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-                        <div className="bg-white/60 backdrop-blur-md rounded-2xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-lg border border-white/20">
-                            <div className="flex justify-between items-start mb-6">
-                                <h3 className="text-2xl font-bold text-gray-900">{activeProject.title}</h3>
-                                <button
-                                    onClick={() => setActiveProject(null)}
-                                    className="text-gray-500 hover:text-gray-700"
-                                >
-                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                </button>
+                        <div className="bg-white/60 backdrop-blur-md rounded-2xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-lg border border-white/20 relative">
+                            {/* Red X Close Button */}
+                            <button
+                                onClick={() => setActiveProject(null)}
+                                className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-red-600 hover:bg-red-700 text-white text-2xl font-bold shadow-lg z-50 transition-colors duration-200"
+                                aria-label="Close"
+                            >
+                                &times;
+                            </button>
+                            {/* Project Media */}
+                            <div className="mb-6 flex items-center justify-center">
+                                {activeProject.src.match(/\.(mp4|mov|webm)$/i) ? (
+                                    <video
+                                        src={activeProject.src}
+                                        className="w-full max-h-96 object-cover rounded-xl mx-auto"
+                                        autoPlay
+                                        loop
+                                        muted
+                                        controls
+                                        playsInline
+                                        poster="/video_poster.jpg"
+                                    />
+                                ) : (
+                                    <img
+                                        src={activeProject.src}
+                                        alt={activeProject.title}
+                                        className="w-full max-h-96 object-cover rounded-xl mx-auto"
+                                    />
+                                )}
                             </div>
 
                             <div className="space-y-6">
+                                <h3 className="text-2xl font-bold text-gray-900">{activeProject.title}</h3>
                                 <p className="text-gray-800">{activeProject.description}</p>
-
-                                <div>
-                                    <h4 className="text-lg font-semibold text-gray-900 mb-3">Key Features</h4>
-                                    <ul className="list-disc list-inside space-y-2 text-gray-800">
-                                        {activeProject.features.map((feature, idx) => (
-                                            <li key={idx}>{feature}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-
                                 <div>
                                     <h4 className="text-lg font-semibold text-gray-900 mb-3">Technologies Used</h4>
                                     <div className="flex flex-wrap gap-2">
@@ -245,21 +213,6 @@ const Projects: React.FC<ProjectsProps> = ({ className }) => {
                                             >
                                                 {tech}
                                             </span>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <h4 className="text-lg font-semibold text-gray-900 mb-3">Challenges & Solutions</h4>
-                                    <div className="space-y-4">
-                                        {activeProject.challenges.map((challenge, idx) => (
-                                            <div key={idx} className="bg-white/70 backdrop-blur-sm p-4 rounded-lg">
-                                                <h5 className="font-medium text-gray-900 mb-2">Challenge {idx + 1}</h5>
-                                                <p className="text-gray-800 mb-2">{challenge}</p>
-                                                <p className="text-gray-800">
-                                                    <span className="font-medium text-purple-600">Solution:</span> {activeProject.solutions[idx]}
-                                                </p>
-                                            </div>
                                         ))}
                                     </div>
                                 </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface ExperienceProps {
   className?: string;
@@ -16,6 +16,7 @@ interface Experience {
 }
 
 const Experience: React.FC<ExperienceProps> = ({ className }) => {
+  const [selectedExperience, setSelectedExperience] = useState<Experience | null>(null);
   const experiences: Experience[] = [
     {
       title: 'Design Software Engineer',
@@ -79,9 +80,12 @@ const Experience: React.FC<ExperienceProps> = ({ className }) => {
             {experiences.map((exp, index) => (
               <div key={exp.title} className="relative flex flex-col md:flex-row md:items-center">
                 {/* Left Side (Card or Spacer) */}
-                <div className={`md:w-1/2 flex ${index % 2 === 0 ? 'justify-end' : 'justify-start'} md:pr-8 md:pl-0 md:order-${index % 2 === 0 ? '1' : '3'} order-2`}> 
+                <div className={`md:w-1/2 flex ${index % 2 === 0 ? 'justify-end' : 'justify-start'} md:pr-8 md:pl-0 md:order-${index % 2 === 0 ? '1' : '3'} order-2`}>
                   {index % 2 === 0 ? (
-                    <div className="w-full md:max-w-3xl bg-white/20 backdrop-blur-xl rounded-xl p-10 shadow-lg hover:shadow-xl transition-all duration-300">
+                    <div
+                      className="w-full md:max-w-3xl bg-white/20 backdrop-blur-xl rounded-xl p-10 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
+                      onClick={() => setSelectedExperience(exp)}
+                    >
                       <h3 className="text-xl font-bold text-gray-900 mb-1">{exp.title}</h3>
                       <p className="text-lg text-purple-600 font-medium mb-2">{exp.company}</p>
                       <div className="flex items-center text-gray-600 text-sm mb-2">
@@ -134,7 +138,10 @@ const Experience: React.FC<ExperienceProps> = ({ className }) => {
                 {/* Right Side (Card or Spacer) */}
                 <div className={`md:w-1/2 flex ${index % 2 !== 0 ? 'justify-start' : 'justify-end'} md:pl-8 md:pr-0 md:order-${index % 2 !== 0 ? '3' : '1'} order-3`}>
                   {index % 2 !== 0 ? (
-                    <div className="w-full md:max-w-3xl bg-white/20 backdrop-blur-xl rounded-xl p-10 shadow-lg hover:shadow-xl transition-all duration-300">
+                    <div
+                      className="w-full md:max-w-3xl bg-white/20 backdrop-blur-xl rounded-xl p-10 shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
+                      onClick={() => setSelectedExperience(exp)}
+                    >
                       <h3 className="text-xl font-bold text-gray-900 mb-1">{exp.title}</h3>
                       <p className="text-lg text-purple-600 font-medium mb-2">{exp.company}</p>
                       <div className="flex items-center text-gray-600 text-sm mb-2">
@@ -180,6 +187,48 @@ const Experience: React.FC<ExperienceProps> = ({ className }) => {
           </div>
         </div>
       </div>
+      {/* Experience Modal */}
+      {selectedExperience && (
+        <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <div className="bg-white/60 backdrop-blur-md rounded-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-lg border border-white/20 relative">
+            {/* Red X Close Button */}
+            <button
+              onClick={() => setSelectedExperience(null)}
+              className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-red-600 hover:bg-red-700 text-white text-2xl font-bold shadow-lg z-50 transition-colors duration-200"
+              aria-label="Close"
+            >
+              &times;
+            </button>
+            <h3 className="text-2xl font-bold text-gray-900 mb-2">{selectedExperience.title}</h3>
+            <p className="text-lg text-purple-600 font-medium mb-2">{selectedExperience.company}</p>
+            <div className="flex items-center text-gray-600 text-sm mb-2">
+              {selectedExperience.location} &bull; {selectedExperience.period}
+            </div>
+            <p className="text-gray-600 text-lg mb-4">{selectedExperience.description}</p>
+            <div className="mb-2">
+              <h4 className="text-xs font-semibold text-gray-900 mb-1">Key Achievements</h4>
+              <ul className="space-y-2">
+                {selectedExperience.achievements.map((achievement, idx) => (
+                  <li key={idx} className="flex items-start space-x-2 text-gray-700 text-base">
+                    <span className="text-purple-500 mt-1">•</span>
+                    <span>{achievement}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-xs font-semibold text-gray-900 mb-1">Technologies Used</h4>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {selectedExperience.technologies.map((tech) => (
+                  <span key={tech} className="px-3 py-1 bg-white/60 backdrop-blur-sm rounded-full text-gray-800 text-base">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
