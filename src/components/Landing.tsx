@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Typewriter from './Typewriter';
+
 
 interface LandingProps {
     className?: string;
