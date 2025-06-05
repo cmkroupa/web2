@@ -1,94 +1,6 @@
 import React, { useState } from 'react';
 
-interface ContactProps {
-  className?: string;
-}
-
-const Contact: React.FC<ContactProps> = ({ className }) => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
-  // Validation
-  const isNameValid = formData.name.trim().length > 0;
-  const isEmailValid = /^\S+@\S+\.\S+$/.test(formData.email);
-  const isMessageValid = formData.message.trim().length > 0;
-  const isValid = isNameValid && isEmailValid && isMessageValid;
-
-  // Button message logic
-  let buttonMessage = 'Send Message';
-  if (!isNameValid) buttonMessage = 'Enter your name';
-  else if (!isEmailValid) buttonMessage = 'Enter a valid email';
-  else if (!isMessageValid) buttonMessage = 'Enter your message';
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setError(null);
-    setIsSuccess(false);
-
-
-    try {
-      const res = await fetch(`/api/contact`, { 
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-
-      let data = null;
-      let backendError = '';
-      try {
-        // Attempt to read and parse the response text
-        const text = await res.text();
-        data = text ? JSON.parse(text) : null;
-      } catch (e) {
-        // If parsing fails, it means the response was not valid JSON (e.g., empty, plain text error)
-        data = null;
-      }
-
-      if (!res.ok) {
-        // If response status is not 2xx, it's an error from the backend
-        backendError = (data && (data.error || data.message)) || res.statusText || 'Unknown error';
-        setError(`Error ${res.status}: ${backendError}`);
-        console.error('Contact form error:', { status: res.status, data, backendError });
-        return;
-      }
-
-      // Check for expected success data from your Express backend
-      // Your Express backend sends { message: 'Message sent successfully!', contactId: newContact._id }
-      if (!data || !(data.message || data.contactId)) {
-        setError('Message was sent, but response from server was unexpected.');
-        console.error('Contact form: Unexpected response from backend', { data });
-        return;
-      }
-
-      setIsSuccess(true);
-      // Clear the form only on successful submission
-      setFormData({ name: '', email: '', message: '' });
-
-    } catch (err: any) {
-      // Catch network errors (e.g., server not running, CORS issues if not configured correctly)
-      setError('Network or unexpected error: ' + (err.message || 'An unknown network error occurred.'));
-      console.error('Contact form network/unexpected error:', err);
-    } finally {
-      setIsSubmitting(false);
-      // Hide success message after 3 seconds
-      setTimeout(() => setIsSuccess(false), 3000);
-    }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
+const Contact = () => {
 
   const socialLinks = [
     {
@@ -99,7 +11,7 @@ const Contact: React.FC<ContactProps> = ({ className }) => {
     {
       name: 'LinkedIn',
       icon: '💼',
-      url: 'www.linkedin.com/in/cameron-kroupa-7404ba289'
+      url: 'https://www.linkedin.com/in/cameron-kroupa-7404ba289'
     }
   ];
 
@@ -118,7 +30,7 @@ const Contact: React.FC<ContactProps> = ({ className }) => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <img src="/wip.png" alt="img" className="w-full h-full object-cover" />
+          <img src="/wip.png" alt="WIP" className="w-full h-full object-cover" />
 
           {/* Contact Info */}
           <div className="space-y-8">
